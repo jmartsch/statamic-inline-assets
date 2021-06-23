@@ -14,7 +14,12 @@ class InlineAssets extends Tags
             $this->params->get(['src', 'path'])
         );
 
-        $response = file_get_contents($asset);
+        try{
+            $response = file_get_contents($asset);
+        }
+        catch (\Exception $e){
+            return new HtmlString("");
+        }
 
         if ($this->params->bool('minify')) {
             $minifier = new Minify\JS($asset);
@@ -30,7 +35,12 @@ class InlineAssets extends Tags
             $this->params->get(['src', 'path'])
         );
 
-        $response = file_get_contents($asset);
+        try{
+            $response = file_get_contents($asset);
+        }
+        catch (\Exception $e){
+            return new HtmlString("");
+        }
 
         if ($this->params->bool('minify')) {
             $minifier = new Minify\CSS($asset);
